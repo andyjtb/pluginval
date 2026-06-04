@@ -213,34 +213,34 @@ if (PLUGINVAL_ENABLE_RTCHECK)
     endif ()
 endif()
 
-if (pluginval_IS_TOP_LEVEL)
-    set (cmdline_docs_out "${CMAKE_CURRENT_LIST_DIR}/docs/Command line options.md")
-
-    add_custom_command (OUTPUT "${cmdline_docs_out}"
-                        COMMAND pluginval --help > "${cmdline_docs_out}"
-                        COMMENT "Regenerating Command line options.md..."
-                        USES_TERMINAL)
-    add_custom_target (PluginvalDocs DEPENDS "${cmdline_docs_out}")
-else()
-    # Custom pluginval CLI target
-    set(PLUGINVAL_STRICTNESS_LEVEL 10 CACHE STRING "Pluginval --strictness argument (1-10)")
-    set_property(CACHE PLUGINVAL_STRICTNESS_LEVEL PROPERTY STRINGS 1 2 3 4 5 6 7 8 9 10)
-
-    # Set the target based on the platform
-    # Makes the assumption both are being built
-    if(APPLE)
-        set(PLUGINVAL_TARGET "${CMAKE_PROJECT_NAME}_AU")
-    else()
-        set(PLUGINVAL_TARGET "${CMAKE_PROJECT_NAME}_VST3")
-    endif()
-
-    get_target_property(artefact ${PLUGINVAL_TARGET} JUCE_PLUGIN_ARTEFACT_FILE)
-
-    # TODO: This doesn't populate the executable in clion
-    add_custom_target(${CMAKE_PROJECT_NAME}_pluginval_cli
-            COMMAND $<TARGET_FILE:pluginval>
-            --validate ${artefact}
-            --strictness-level 10
-            DEPENDS pluginval ${PLUGINVAL_TARGET}
-            COMMENT "Run pluginval CLI with strict validation")
-endif()
+#if (pluginval_IS_TOP_LEVEL)
+#    set (cmdline_docs_out "${CMAKE_CURRENT_LIST_DIR}/docs/Command line options.md")
+#
+#    add_custom_command (OUTPUT "${cmdline_docs_out}"
+#                        COMMAND pluginval --help > "${cmdline_docs_out}"
+#                        COMMENT "Regenerating Command line options.md..."
+#                        USES_TERMINAL)
+#    add_custom_target (PluginvalDocs DEPENDS "${cmdline_docs_out}")
+#else()
+#    # Custom pluginval CLI target
+#    set(PLUGINVAL_STRICTNESS_LEVEL 10 CACHE STRING "Pluginval --strictness argument (1-10)")
+#    set_property(CACHE PLUGINVAL_STRICTNESS_LEVEL PROPERTY STRINGS 1 2 3 4 5 6 7 8 9 10)
+#
+#    # Set the target based on the platform
+#    # Makes the assumption both are being built
+#    if(APPLE)
+#        set(PLUGINVAL_TARGET "${CMAKE_PROJECT_NAME}_AU")
+#    else()
+#        set(PLUGINVAL_TARGET "${CMAKE_PROJECT_NAME}_VST3")
+#    endif()
+#
+#    get_target_property(artefact ${PLUGINVAL_TARGET} JUCE_PLUGIN_ARTEFACT_FILE)
+#
+#    # TODO: This doesn't populate the executable in clion
+#    add_custom_target(${CMAKE_PROJECT_NAME}_pluginval_cli
+#            COMMAND $<TARGET_FILE:pluginval>
+#            --validate ${artefact}
+#            --strictness-level 10
+#            DEPENDS pluginval ${PLUGINVAL_TARGET}
+#            COMMENT "Run pluginval CLI with strict validation")
+#endif()
