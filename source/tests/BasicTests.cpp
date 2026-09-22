@@ -186,6 +186,13 @@ struct EditorWhilstProcessingTest   : public PluginTest
                                                  {
                                                      fillNoise (ab);
 
+                                                     if (instance.acceptsMidi())
+                                                     {
+                                                         const int note = 48 + (blockNum % 24);
+                                                         addNoteOn (mb, 1, note, 0);
+                                                         addNoteOff (mb, 1, note, juce::jmax (0, ab.getNumSamples() - 1));
+                                                     }
+
                                                      {
                                                          RTC_REALTIME_CONTEXT_IF_ENABLED(ut.getOptions().realtimeCheck, blockNum)
                                                          instance.processBlock (ab, mb);
@@ -200,9 +207,11 @@ struct EditorWhilstProcessingTest   : public PluginTest
 
             threadStartedEvent.wait();
 
-            // Show the editor
+            // Show the editor, and keep processing under it: an editor that listens to the
+            // plugin's MIDI stream gets its callbacks on the processing thread.
             ScopedEditorShower editor (instance);
             ut.expect (editor.editor.get() != nullptr || ! instance.hasEditor(), "Unable to create editor");
+            juce::Thread::sleep (300);
 
             shouldProcess = false;
         }

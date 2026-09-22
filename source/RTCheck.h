@@ -26,6 +26,7 @@
           rc.emplace();                             \
           rtc::disable_checks_for_thread (static_cast<uint64_t>(rtc::check_flags::pthread_mutex_lock) \
                                           | static_cast<uint64_t>(rtc::check_flags::pthread_mutex_unlock)); \
+                                          rtc::set_error_mode (rtc::error_mode::cont); \
       }
 
     #define RTC_REALTIME_CONTEXT_IF_ENABLED(realtimeCheckMode, blockNum)                                        \
@@ -38,6 +39,7 @@
               rc.emplace();                                                                                     \
               rtc::disable_checks_for_thread (static_cast<uint64_t>(rtc::check_flags::pthread_mutex_lock)       \
                                               | static_cast<uint64_t>(rtc::check_flags::pthread_mutex_unlock)); \
+                                              rtc::set_error_mode (rtc::error_mode::cont); \
           }                                                                                                     \
       }
 #else
