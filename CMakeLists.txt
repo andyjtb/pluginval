@@ -95,7 +95,7 @@ if(PLUGINVAL_VST3_VALIDATOR)
     CPMAddPackage(
         NAME vst3sdk
         GITHUB_REPOSITORY steinbergmedia/vst3sdk
-        GIT_TAG v3.7.14_build_55
+        GIT_TAG v3.8.1_build_84
         OPTIONS
             "SMTG_ENABLE_VST3_PLUGIN_EXAMPLES OFF"
             "SMTG_ENABLE_VST3_HOSTING_EXAMPLES OFF"
@@ -184,7 +184,7 @@ endif()
 
 target_compile_definitions(pluginval PRIVATE
     JUCE_PLUGINHOST_AU=1
-    JUCE_PLUGINHOST_LADSPA=1
+    JUCE_PLUGINHOST_LADSPA=0
     JUCE_PLUGINHOST_VST3=1
     JUCE_PLUGINHOST_LV2=1
     JUCE_USE_CURL=0
