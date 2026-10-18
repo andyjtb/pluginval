@@ -143,9 +143,7 @@ namespace
     void showPluginFilterDialog()
     {
         const juce::String message = TRANS("Enter plugin names to scan for (comma-separated).\nOnly plugins containing these names will be scanned.");
-        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindow (TRANS("Set Plugin Name Filter"), message,
-                                                                                                 TRANS("OK"), TRANS("Clear"), TRANS("Cancel"),
-                                                                                                 juce::AlertWindow::QuestionIcon, 3, nullptr));
+        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindowForOptions (juce::MessageBoxOptions().withIconType (juce::MessageBoxIconType::QuestionIcon).withTitle (TRANS("Set Plugin Name Filter")).withMessage (message).withButton (TRANS("OK"), 1).withButton (TRANS("Clear"), 2).withButton (TRANS("Cancel"), 0)));
         aw->addTextEditor ("filter", getPluginNameFilter());
         aw->enterModalState (true, juce::ModalCallbackFunction::create ([aw] (int res)
                                                                   {
@@ -209,9 +207,7 @@ namespace
     void showRandomSeedDialog()
     {
         const juce::String message = TRANS("Set the random seed to use for the tests, useful for replicating issues");
-        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindow (TRANS("Set Random Seed"), message,
-                                                                                                 TRANS("OK"), TRANS("Cancel"), juce::String(),
-                                                                                                 juce::AlertWindow::QuestionIcon, 2, nullptr));
+        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindowForOptions (juce::MessageBoxOptions().withIconType (juce::MessageBoxIconType::QuestionIcon).withTitle (TRANS("Set Random Seed")).withMessage (message).withButton (TRANS("OK"), 1).withButton (TRANS("Cancel"), 0)));
         aw->addTextEditor ("randomSeed",juce::String (getRandomSeed()));
         aw->enterModalState (true, juce::ModalCallbackFunction::create ([aw] (int res)
                                                                   {
@@ -230,9 +226,7 @@ namespace
     void showTimeoutDialog()
     {
         const juce::String message = TRANS("Set the duration in milliseconds after which to kill the validation if there has been no output from it");
-        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindow (TRANS("Set Timeout (ms)"), message,
-                                                                                                 TRANS("OK"), TRANS("Cancel"), juce::String(),
-                                                                                                 juce::AlertWindow::QuestionIcon, 2, nullptr));
+        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindowForOptions (juce::MessageBoxOptions().withIconType (juce::MessageBoxIconType::QuestionIcon).withTitle (TRANS("Set Timeout (ms)")).withMessage (message).withButton (TRANS("OK"), 1).withButton (TRANS("Cancel"), 0)));
         aw->addTextEditor ("timeoutMs",juce::String (getTimeoutMs()));
         aw->enterModalState (true, juce::ModalCallbackFunction::create ([aw] (int res)
                                                                   {
@@ -245,9 +239,7 @@ namespace
     void showNumRepeatsDialog()
     {
         const juce::String message = TRANS("Set the number of times the tests will be repeated");
-        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindow (TRANS("Set Number of Repeats"), message,
-                                                                                                 TRANS("OK"), TRANS("Cancel"), juce::String(),
-                                                                                                 juce::AlertWindow::QuestionIcon, 2, nullptr));
+        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindowForOptions (juce::MessageBoxOptions().withIconType (juce::MessageBoxIconType::QuestionIcon).withTitle (TRANS("Set Number of Repeats")).withMessage (message).withButton (TRANS("OK"), 1).withButton (TRANS("Cancel"), 0)));
         aw->addTextEditor ("repeats",juce::String (getNumRepeats()));
         aw->enterModalState (true, juce::ModalCallbackFunction::create ([aw] (int res)
                                                                   {
@@ -267,9 +259,7 @@ namespace
         else
             message << "\n\n" << "\"None set\"";
 
-        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindow (TRANS("Set Log File Directory"), message,
-                                                                                                 TRANS("Choose dir"), TRANS("Don't save logs"), TRANS("Cancel"),
-                                                                                                 juce::AlertWindow::QuestionIcon, 3, nullptr));
+        std::shared_ptr<juce::AlertWindow> aw (juce::LookAndFeel::getDefaultLookAndFeel().createAlertWindowForOptions (juce::MessageBoxOptions().withIconType (juce::MessageBoxIconType::QuestionIcon).withTitle (TRANS("Set Log File Directory")).withMessage (message).withButton (TRANS("Choose dir"), 1).withButton (TRANS("Don't save logs"), 2).withButton (TRANS("Cancel"), 0)));
         aw->enterModalState (true, juce::ModalCallbackFunction::create ([aw] (int res)
                                                                   {
                                                                       if (res == 1)
